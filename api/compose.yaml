@@ -1,0 +1,16 @@
+version: '3.9'
+
+services:
+  database:
+    image: postgres:15.1-alpine
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres_vol:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: registration_sys
+    container_name: registration_sys_db
+
+volumes:
+  postgres_vol: {}
