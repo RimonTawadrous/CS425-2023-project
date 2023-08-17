@@ -17,6 +17,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @AllArgsConstructor
 @Configuration
@@ -45,6 +47,18 @@ public class SecurityConfig
     }
 
 
+    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedMethods("HEAD", "GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS");
+            }
+        };
+    }
+
+
     @Bean // (4)
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
                 // @formatter:off
@@ -63,19 +77,16 @@ public class SecurityConfig
                         )
                 // Set permissions on endpoints
                 .authorizeHttpRequests((request) ->{
-                    request.requestMatchers("/api/v1/auth/**").permitAll();
                     request.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll();
+                    request.requestMatchers("/api/v1/auth/**").permitAll();
                     request.requestMatchers(
                             "/configuration/ui",
                             "/swagger-resources/**",
                             "/configuration/security",
                             "/webjars/**").permitAll();
                     request.requestMatchers("/api/v1/**").authenticated();
-
                         }
-
                 );
-
 
         // @formatter:on
         return http.build();

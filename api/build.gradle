@@ -44,5 +44,14 @@ tasks.named('test') {
 	useJUnitPlatform()
 }
 
-
-
+bootRun {
+	// Use Spring Boot DevTool only when we run Gradle bootRun task
+	classpath = sourceSets.main.runtimeClasspath + configurations.developmentOnly
+	sourceResources sourceSets.main
+	if (project.hasProperty('profiles')) {
+		environment SPRING_PROFILES_ACTIVE: profiles
+	} else {
+		def profiles = 'local'
+		environment SPRING_PROFILES_ACTIVE: profiles
+	}
+}

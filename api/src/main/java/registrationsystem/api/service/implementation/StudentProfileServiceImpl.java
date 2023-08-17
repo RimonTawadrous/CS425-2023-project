@@ -2,6 +2,7 @@ package registrationsystem.api.service.implementation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import registrationsystem.api.common.exception.RecordNotFoundException;
 import registrationsystem.api.enums.RoleEnum;
 import registrationsystem.api.model.Role;
@@ -23,6 +24,7 @@ public class StudentProfileServiceImpl implements StudentProfileService {
     private final RoleRepository roleRepository;
     private final UserService userService;
 
+    @Transactional
     public StudentProfile create(StudentProfile studentProfile){
         Role studentRole = roleRepository.findRoleByInternalName(RoleEnum.STUDENT.toString()).get();
         User user = studentProfile.getUser();
@@ -30,18 +32,19 @@ public class StudentProfileServiceImpl implements StudentProfileService {
 
         User savedUser = userService.create(user);
         studentProfile.setUser(savedUser);
-        System.out.println(savedUser);
-        System.out.println(studentProfile);
-
         return repository.save(studentProfile);
     }
 
-    public StudentProfile update (StudentProfile studentProfile){
+    public StudentProfile update (Long id ,StudentProfile studentProfile) throws RecordNotFoundException{
+        StudentProfile savedStudent = repository.findById(id).orElseThrow(()-> new RecordNotFoundException("Student not found"));
+        User user = userService.update(savedStudent.getUser().getId(), studentProfile.getUser());
+        studentProfile.setId(savedStudent.getId());
+        studentProfile.setUser(user);
         return repository.save(studentProfile);
     }
 
-    public StudentProfile delete (Long id) throws RecordNotFoundException {
-//        Optional<StudentProfile> studentProfile =
-        return repository.findById(id).orElseThrow(() -> new RecordNotFoundException("rersr"));
+    public void delete (Long id) throws RecordNotFoundException {
+        StudentProfile studentProfile = repository.findById(id).orElseThrow(()-> new RecordNotFoundException("Student not found"));
+        userService.deactivate(studentProfile.getUser());
     }
 }

@@ -2,6 +2,8 @@ package registrationsystem.api.controller;
 
 import lombok.AllArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import registrationsystem.api.common.exception.RecordNotFoundException;
@@ -22,6 +24,8 @@ public class StudentController {
     private final ModelMapper modelMapper;
     private final MappingUtils mappingUtils;
     private final StudentProfileRepository repository;
+
+    @Qualifier("studentProfileServiceImpl")
     private final StudentProfileService service;
     @GetMapping()
     public ResponseEntity<List<StudentProfileDTO>> index(){
@@ -38,17 +42,8 @@ public class StudentController {
 
     @PostMapping()
     public ResponseEntity<StudentProfileDTO> create(@RequestBody StudentCreationDTO studentCreationDTO){
-//        User user = modelMapper.map(studentCreationDTO, User.class);
-//        System.out.println(user.getFirstName());
-        User user = User.builder()
-                .email(studentCreationDTO.getEmail())
-                .username(studentCreationDTO.getUsername())
-                .password(studentCreationDTO.getPassword())
-                .firstName(studentCreationDTO.getFirstName())
-                .lastName(studentCreationDTO.getLastName())
-                .build();
-
-        System.out.println(user);
+        User user = modelMapper.map(studentCreationDTO, User.class);
+        user.setStudentProfile(null);
         StudentProfile studentProfile = modelMapper.map(studentCreationDTO, StudentProfile.class);
         studentProfile.setUser(user);
         studentProfile = service.create(studentProfile);
@@ -56,8 +51,16 @@ public class StudentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<StudentProfile> update(){
+    public ResponseEntity<StudentProfileDTO> update(@PathVariable Long id, @RequestBody StudentCreationDTO studentCreationDTO )throws RecordNotFoundException{
+        StudentProfile studentProfile = modelMapper.map(studentCreationDTO, StudentProfile.class);
+        service.update(id, studentProfile);
+        return new ResponseEntity<StudentProfileDTO>(modelMapper.map(studentProfile,StudentProfileDTO.class), HttpStatus.CREATED);
+    }
 
-        return ResponseEntity.ok(new StudentProfile());
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id) throws RecordNotFoundException{
+        service.delete(id);
+        return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
     }
 }

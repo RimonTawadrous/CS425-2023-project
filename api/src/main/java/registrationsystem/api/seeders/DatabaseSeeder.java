@@ -6,19 +6,23 @@ import org.springframework.context.event.EventListener;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import registrationsystem.api.enums.RoleEnum;
-import registrationsystem.api.model.AdminProfile;
-import registrationsystem.api.model.Role;
-import registrationsystem.api.model.User;
+import registrationsystem.api.model.*;
 import registrationsystem.api.repository.RoleRepository;
 import registrationsystem.api.service.AdminProfileService;
+import registrationsystem.api.service.FacultyProfileService;
+import registrationsystem.api.service.StudentProfileService;
 import registrationsystem.api.service.UserService;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
 @AllArgsConstructor
 public class DatabaseSeeder {
     private final AdminProfileService adminProfileService;
+    private final StudentProfileService studentProfileService;
+    private final FacultyProfileService facultyProfileService;
+
     private JdbcTemplate jdbcTemplate;
     private RoleRepository roleRepository;
 
@@ -26,7 +30,8 @@ public class DatabaseSeeder {
     public void seed(ContextRefreshedEvent event) {
         seedRoleTable();
         seedAdminsTable();
-
+        seedFacultiesTable();
+        seedStudentsTable();
     }
 
     private void seedRoleTable(){
@@ -62,6 +67,47 @@ public class DatabaseSeeder {
         AdminProfile admin = new AdminProfile();
         admin.setUser(user);
         adminProfileService.create(admin);
+    }
+
+    private void seedFacultiesTable(){
+        String sql = "SELECT * FROM  faculty_profile LIMIT 1";
+        List<AdminProfile> faculties = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
+        if(!faculties.isEmpty()) {
+            return;
+        }
+        User user = User.builder()
+                .email("faculty@email.com")
+                .username("faculty")
+                .password("123")
+                .firstName("faculty")
+                .lastName("1")
+                .build();
+
+        FacultyProfile faculty = new FacultyProfile();
+        faculty.setUser(user);
+        facultyProfileService.create(faculty);
+    }
+
+    private void seedStudentsTable(){
+        String sql = "SELECT * FROM  student_profile LIMIT 1";
+        List<AdminProfile> students = jdbcTemplate.query(sql, (resultSet, rowNum) -> null);
+        if(!students.isEmpty()) {
+            return;
+        }
+        User user = User.builder()
+                .email("student@email.com")
+                .username("student")
+                .password("123")
+                .firstName("Student")
+                .lastName("1")
+                .build();
+
+        StudentProfile student = new StudentProfile();
+        student.setUser(user);
+        student.setStudentNumber(1234);
+        student.setCgpa(4);
+        student.setDateOfEnrollment(LocalDate.now());
+        studentProfileService.create(student);
     }
 
 }

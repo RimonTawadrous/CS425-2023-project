@@ -27,9 +27,6 @@ public class StudentProfile {
     @JoinColumn(name = "user_id")
     private User user;
 
-    @OneToOne(mappedBy = "studentProfile")
-    private Transcript transcript;
-
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "students_course_classes"
             , joinColumns = {@JoinColumn(name = "student_id", referencedColumnName = "ID")}
@@ -46,7 +43,6 @@ public class StudentProfile {
                 ", cgpa=" + cgpa +
                 ", dateOfEnrollment=" + dateOfEnrollment +
                 ", user=" + user +
-                ", transcript=" + transcript +
                 ", courseClasses=" + courseClasses +
                 '}';
     }

@@ -8,7 +8,7 @@ import registrationsystem.api.model.StudentProfile;
 public interface StudentProfileService {
     public StudentProfile create(StudentProfile studentProfile);
 
-    public StudentProfile update (StudentProfile studentProfile);
+    public StudentProfile update (Long id, StudentProfile studentProfile) throws RecordNotFoundException;
 
-    public StudentProfile delete (Long id) throws RecordNotFoundException;
+    public void delete (Long id) throws RecordNotFoundException;
 }

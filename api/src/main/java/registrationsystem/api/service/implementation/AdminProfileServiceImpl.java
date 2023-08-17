@@ -2,6 +2,7 @@ package registrationsystem.api.service.implementation;
 
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
+import registrationsystem.api.common.exception.RecordNotFoundException;
 import registrationsystem.api.enums.RoleEnum;
 import registrationsystem.api.model.AdminProfile;
 import registrationsystem.api.model.Role;
@@ -27,5 +28,15 @@ public class AdminProfileServiceImpl implements AdminProfileService {
         admin.getUser().setRoles(List.of(adminRole));
         userService.create(admin.getUser());
         return repository.save(admin);
+    }
+
+    @Override
+    public AdminProfile update(Long id, AdminProfile admin) throws RecordNotFoundException {
+        return null;
+    }
+
+    @Override
+    public void delete(Long id) throws RecordNotFoundException {
+
     }
 }
