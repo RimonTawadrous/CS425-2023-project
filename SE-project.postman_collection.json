@@ -1,0 +1,331 @@
+{
+	"info": {
+		"_postman_id": "83fc9598-c1c5-4423-bf64-d4a90a11cd2b",
+		"name": "SE-project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13695543",
+		"_collection_link": "https://lunar-desert-768308.postman.co/workspace/SE-Course~a8721c60-63ef-4a3d-90d7-4b3ab1354186/collection/13695543-83fc9598-c1c5-4423-bf64-d4a90a11cd2b?action=share&source=collection_link&creator=13695543"
+	},
+	"item": [
+		{
+			"name": "Student Scope",
+			"item": []
+		},
+		{
+			"name": "Admin Scope",
+			"item": [
+				{
+					"name": "Students",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"firstName\",\n    \"middleName\": \"middleName\",\n    \"lastName\": \"lastName\",\n    \"username\": \"username+s1\",\n    \"email\": \"email+s1@email.com\",\n    \"password\": \"123\",\n    \"studentNumber\": 2,\n    \"cgpa\": 3.0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/students",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "All Students",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Student",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/students/103",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										"103"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"firstName\",\n    \"middleName\": \"middleName\",\n    \"lastName\": \"lastName\",\n    \"username\": \"username+s1\",\n    \"email\": \"email+s1@email.com\",\n    \"password\": \"123\",\n    \"studentNumber\": 2,\n    \"cgpa\": 4.0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/students/3",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"students",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Faculties",
+					"item": [
+						{
+							"name": "Create",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"F_N_1\",\n    \"middleName\": \"F_M_N_1\",\n    \"lastName\": \"L_N_1\",\n    \"username\": \"username+f1\",\n    \"email\": \"email+f1@email.com\",\n    \"password\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/faculties",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"faculties"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "All Faculties",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/faculties",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"faculties"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Faculty",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/faculties/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"faculties",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "New Request",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{base_url}}/faculties/1",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"faculties",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"firstName\": \"F_N_1.5\",\n    \"middleName\": \"F_M_N_1\",\n    \"lastName\": \"L_N_1\",\n    \"username\": \"username+f1\",\n    \"email\": \"email+f1@email.com\",\n    \"password\": \"123\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url}}/faculties/2",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"faculties",
+										"2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			],
+			"auth": {
+				"type": "bearer",
+				"bearer": [
+					{
+						"key": "token",
+						"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTY5MjMwOTQzOCwiZXhwIjoxNjkyMzIyMzM4fQ._NDKpIEvF-jsIVNToP1lkGHLUddCrWBQtvi27Msi9Lg",
+						"type": "string"
+					}
+				]
+			},
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		},
+		{
+			"name": "public",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"admin\",\n    \"password\": \"123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8080/api/v1",
+			"type": "string"
+		}
+	]
+}

@@ -5,8 +5,7 @@ import NavItem from "./NavItem/NavItem";
 import DashboardIcon from "./Icons/DashboardIcon";
 import StudentsIcon from "./Icons/StudentsIcon";
 import FacultiesIcon from "./Icons/FacultiesIcon";
-import JobAdsIcon from "./Icons/JobAdsIcon";
-import { useAuth } from "@src/contexts/AuthProvider";
+import { useAuth } from "@src/Auth/AuthProvider";
 import LogoutIcon from "./Icons/LogoutIcon";
 
 export default function SideNav() {
@@ -109,11 +108,6 @@ export default function SideNav() {
                               <FacultiesIcon />
                             </NavItem>
                           </li>
-                          <li>
-                            <NavItem to="/job-ads" title="Jobs">
-                              <JobAdsIcon />
-                            </NavItem>
-                          </li>
                         </ul>
                       </li>
                     </ul>
@@ -190,8 +184,13 @@ export default function SideNav() {
                     </NavItem>
                   </li>
                   <li>
-                    <NavItem to="/job-ads" title="Jobs">
-                      <JobAdsIcon />
+                    <NavItem to="/courses" title="Courses">
+                      <FacultiesIcon />
+                    </NavItem>
+                  </li>
+                  <li>
+                    <NavItem to="/classes" title="Classes">
+                      <FacultiesIcon />
                     </NavItem>
                   </li>
                 </ul>

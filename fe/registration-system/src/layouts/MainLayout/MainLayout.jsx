@@ -1,5 +1,5 @@
 import { Outlet, Navigate } from "react-router-dom";
-import { useAuth } from "../../contexts/AuthProvider";
+import { useAuth } from "@src/Auth/AuthProvider";
 import SideNav from "../../generic/SideNav";
 
 const MainLayout = () => {

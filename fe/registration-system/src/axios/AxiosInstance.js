@@ -14,6 +14,11 @@ axiosInstance.interceptors.request.use((config) => {
 
 axiosInstance.interceptors.response.use((response) => {
   // Do something after the response is received.
+  if (response.status === 401) {
+    console.log("Unauthorized");
+    localStorage.removeItem("token");
+    window.location.href = "/login";
+  }
   return response;
 });
 

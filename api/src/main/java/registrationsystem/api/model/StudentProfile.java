@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,7 +21,11 @@ public class StudentProfile {
     private long id;
     @Column(nullable = false)
     private long studentNumber;
+
     private float cgpa;
+
+    @Column(nullable = false)
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfEnrollment;
 
     @OneToOne

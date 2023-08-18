@@ -4,7 +4,7 @@ import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import AxiosInstance from "@src/axios/AxiosInstance";
 
-const Students = () => {
+const Classes = () => {
   const [list, setList] = useState([]);
   const [loading, setLoading] = useState(false);
   const [, setPage] = useState(0);
@@ -20,9 +20,12 @@ const Students = () => {
       dataIndex: "id",
     },
     {
-      title: "Name",
-      dataIndex: "user",
-      render: (user) => `${user?.firstName} ${user?.lastName}`,
+      title: "buildingName",
+      dataIndex: "buildingName",
+    },
+    {
+      title: "roomNumber",
+      dataIndex: "roomNumber",
     },
     {
       label: "",
@@ -63,27 +66,27 @@ const Students = () => {
 
   const loadData = async () => {
     setLoading(true);
-    const { data } = await AxiosInstance.get("/students");
+    const { data } = await AxiosInstance.get("/classes");
     setList(data);
     setLoading(false);
   };
 
   const deleteItem = async (id) => {
-    await AxiosInstance.delete(`/students/${id}`);
+    await AxiosInstance.delete(`/classes/${id}`);
     loadData();
   };
 
   return (
     <>
       <Card
-        title={"Students"}
+        title={"Classes"}
         extra={
           <Button
             onClick={() => {
-              navigate("/students/add");
+              navigate("/classes/add");
             }}
           >
-            Add Student
+            Add Course
           </Button>
         }
       >
@@ -98,20 +101,7 @@ const Students = () => {
             }
           }}
         >
-          <Row justify={"space-between"} align={"middle"} gutter={[16, 16]}>
-            {/* <Col span={5}>
-              <Form.Item label="major" name="major">
-                <Select
-                  className="w-100"
-                  showSearch
-                  options={Object.keys(jobSpecialties).map((x) => ({
-                    label: x,
-                    value: x,
-                  }))}
-                />
-              </Form.Item>
-            </Col> */}
-          </Row>
+          <Row justify={"space-between"} align={"middle"} gutter={[16, 16]}></Row>
         </Form>
       </Card>
 
@@ -126,31 +116,6 @@ const Students = () => {
       />
     </>
   );
-  // return (
-  //   <div className="px-5 container">
-  //     <div>
-  //       <div className="md:flex md:items-center md:justify-between">
-  //         <div className="min-w-0 flex-1">
-  //           <h2 className="text-2xl font-bold leading-7 text-gray-900 sm:truncate sm:text-3xl sm:tracking-tight">
-  //             Students
-  //           </h2>
-  //         </div>
-  //         <div className="mt-5WW flex md:ml-4 md:mt-0">
-  //           <Link
-  //             to="/job-ads/add"
-  //             className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-  //           >
-  //             Add
-  //           </Link>
-  //         </div>
-  //       </div>
-  //     </div>
-
-  //     <div className="mt-5">
-  //       <StudentCard />
-  //     </div>
-  //   </div>
-  // );
 };
 
-export default Students;
+export default Classes;
