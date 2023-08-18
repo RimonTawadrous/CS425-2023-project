@@ -28,10 +28,10 @@ public class DatabaseSeeder {
 
     @EventListener
     public void seed(ContextRefreshedEvent event) {
-        seedRoleTable();
-        seedAdminsTable();
-        seedFacultiesTable();
-        seedStudentsTable();
+     //   seedRoleTable();
+      //  seedAdminsTable();
+       // seedFacultiesTable();
+        //seedStudentsTable();
     }
 
     private void seedRoleTable(){
