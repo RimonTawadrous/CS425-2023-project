@@ -26,7 +26,6 @@ public class ClassController {
     private final ModelMapper modelMapper;
     private final MappingUtils mappingUtils;
 
-
     @GetMapping
     public ResponseEntity<List<ClassResponseDTO>> index(){
         return ResponseEntity.ok(
@@ -41,13 +40,8 @@ public class ClassController {
     }
 
     @PostMapping()
-    public ResponseEntity<ClassResponseDTO> create(@RequestBody ClassCreationDTO classCreationDTO){
-        CourseClass courseClass = CourseClass.bu
-
-        CourseClass courseClass = modelMapper.map(classCreationDTO, CourseClass.class);
-
-        courseClass = service.create(courseClass);
+    public ResponseEntity<ClassResponseDTO> create(@RequestBody ClassCreationDTO classCreationDTO) throws RecordNotFoundException {
+        CourseClass courseClass = service.create(classCreationDTO);
         return ResponseEntity.ok(modelMapper.map(courseClass,ClassResponseDTO.class));
     }
-
 }

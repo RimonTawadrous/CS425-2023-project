@@ -31,12 +31,15 @@ public class UserServiceImplementation implements UserService {
     @Override
     public User update(Long id,User user)throws RecordNotFoundException {
         User savedUser = repository.findById(id).orElseThrow(()-> new RecordNotFoundException("User not found"));
+        String hashedPassString = passwordEncoder.encode(user.getPassword());
+        savedUser.setPassword(hashedPassString);
         savedUser.setEmail(user.getEmail());
         savedUser.setFirstName(user.getFirstName());
         savedUser.setMiddleName(user.getMiddleName());
         savedUser.setLastName(user.getLastName());
         savedUser.setPassword(user.getPassword());
         user.setId(savedUser.getId());
+        user.setActive(true);
         return repository.save(user);
     }
 

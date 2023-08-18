@@ -1,4 +1,4 @@
-import { Button, Card, Col, Form, Input, Modal, Row, Space, message, DatePicker } from "antd";
+import { Button, Card, Col, Form, Input, Modal, Row, Space, message } from "antd";
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
@@ -133,11 +133,11 @@ const AddStudent = () => {
                 </Form.Item>
               </Col>
 
-              <Col md={12} xs={24}>
+              {/* <Col md={12} xs={24}>
                 <Form.Item label="dateOfEnrollment" name="dateOfEnrollment" rules={rules.required}>
                   <DatePicker />
                 </Form.Item>
-              </Col>
+              </Col> */}
             </Row>
           </Card>
 
@@ -170,7 +170,7 @@ const AddStudent = () => {
                       await AxiosInstance.post("/students", values);
                     } else {
                       const values = await form.validateFields();
-                      values.dateOfEnrollment = values.dateOfEnrollment.format("YYYY-MM-DD");
+                      // values.dateOfEnrollment = values.dateOfEnrollment.format("YYYY-MM-DD");
                       values.id = id;
                       await AxiosInstance.put(`/students/${id}`, values);
                     }

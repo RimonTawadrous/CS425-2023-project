@@ -24,7 +24,7 @@ public class StudentProfile {
 
     private float cgpa;
 
-    @Column(nullable = false)
+//    @Column(nullable = false)
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dateOfEnrollment;
 

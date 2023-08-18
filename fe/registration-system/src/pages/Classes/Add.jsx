@@ -55,11 +55,8 @@ const AddClasses = () => {
     const { data } = await AxiosInstance.get(`/classes/${id}`);
     form.setFieldsValue({
       ...data,
-      lastName: data?.user?.lastName,
-      firstName: data?.user?.firstName,
-      email: data?.user?.email,
-      middleName: data?.user?.middleName,
-      username: data?.user?.username,
+      courseId: data?.course?.id,
+      facultyId: data?.faculty?.id,
     });
     console.log(data);
   };

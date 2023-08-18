@@ -20,12 +20,27 @@ const Classes = () => {
       dataIndex: "id",
     },
     {
+      title: "course",
+      dataIndex: "roomNumber",
+    },
+    {
       title: "buildingName",
       dataIndex: "buildingName",
     },
     {
-      title: "roomNumber",
-      dataIndex: "roomNumber",
+      title: "Course",
+      dataIndex: "course",
+      render: (course) => {
+        console.log(course);
+        return `${course?.courseName}`;
+      },
+    },
+    {
+      title: "Faculty",
+      dataIndex: "faculty",
+      render: (faculty) => {
+        return `${faculty?.user?.firstName} ${faculty?.user?.lastName}`;
+      },
     },
     {
       label: "",

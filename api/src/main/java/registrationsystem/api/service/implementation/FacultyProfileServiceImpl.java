@@ -33,7 +33,7 @@ public class FacultyProfileServiceImpl implements FacultyProfileService {
         Role facultyRole = roleRepository.findRoleByInternalName(RoleEnum.FACULTY.toString()).get();
         User user = facultyProfile.getUser();
         user.setRoles(List.of(facultyRole));
-
+        user.setActive(true);
         User savedUser = userService.create(user);
         facultyProfile.setUser(savedUser);
         return repository.save(facultyProfile);

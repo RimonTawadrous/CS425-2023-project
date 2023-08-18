@@ -28,8 +28,8 @@ public class StudentProfileServiceImpl implements StudentProfileService {
     public StudentProfile create(StudentProfile studentProfile){
         Role studentRole = roleRepository.findRoleByInternalName(RoleEnum.STUDENT.toString()).get();
         User user = studentProfile.getUser();
+        user.setActive(true);
         user.setRoles(List.of(studentRole));
-
         User savedUser = userService.create(user);
         studentProfile.setUser(savedUser);
         return repository.save(studentProfile);
@@ -40,6 +40,7 @@ public class StudentProfileServiceImpl implements StudentProfileService {
         User user = userService.update(savedStudent.getUser().getId(), studentProfile.getUser());
         studentProfile.setId(savedStudent.getId());
         studentProfile.setUser(user);
+//        studentProfile.setUser();
         return repository.save(studentProfile);
     }
 
